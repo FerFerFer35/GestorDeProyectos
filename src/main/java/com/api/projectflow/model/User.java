@@ -1,17 +1,22 @@
 package com.api.projectflow.model;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "usuarios")
+@Table(name = "users")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
@@ -24,4 +29,12 @@ public class User {
 
     @Column(nullable = false)
     private String contrasena;
+
+    // Proyectos creados por el usuario
+    @OneToMany(mappedBy = "owner")
+    private List<Project> proyectosCreados;
+
+    // Proyectos donde colabora
+    @ManyToMany(mappedBy = "collaborators")
+    private List<Project> proyectosColaborados;
 }
