@@ -37,4 +37,8 @@ public class User {
     // Proyectos donde colabora
     @ManyToMany(mappedBy = "collaborators")
     private List<Project> proyectosColaborados;
+
+    @ManyToMany(mappedBy = "assignedUsers")
+    private List<Task> tasks;
+
 }
